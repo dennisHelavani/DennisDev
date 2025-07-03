@@ -1870,7 +1870,6 @@
             .footer-nav-links {
                 flex-direction: column;
                 gap: 0.5rem;
-                margin-top: 0;
             }
         }
 
@@ -1917,9 +1916,66 @@
             /* Adjusted spacing for the form */
         }
 
-        .contact-form {
-            max-width: 600px;
+        .contact-content-wrapper {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            align-items: flex-start; /* Align items to the top */
+            max-width: 1000px; /* Adjust max-width for the two columns */
             margin: 0 auto;
+        }
+
+        .contact-info-left {
+            flex: 1;
+            background-color: #0e0e0e;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 400px; /* Max width for the info column */
+        }
+
+        .contact-info-left h3 {
+            font-size: 1.8rem;
+            color: #ff4d00;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info-left p {
+            font-size: 1.1rem;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .contact-info-left p .icon {
+            font-size: 1.5rem; /* Size for the unicode symbols */
+            color: #ff4d00;
+        }
+
+        .contact-info-left a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info-left a:hover {
+            color: #ff4d00;
+            text-decoration: underline;
+        }
+
+
+        .contact-form-right {
+            flex: 1.5; /* Give more space to the form */
+            max-width: 600px; /* Max width for the form column */
+        }
+
+        .contact-form {
+            width: 100%; /* Ensure form takes full width of its container */
             background-color: #0e0e0e;
             padding: 3rem;
             border-radius: 12px;
@@ -2002,10 +2058,25 @@
                 padding: 3rem 0;
             }
 
+            .contact-content-wrapper {
+                flex-direction: column; /* Stack columns vertically on mobile */
+                align-items: center; /* Center stacked content */
+                gap: 2rem;
+            }
+
+            .contact-info-left,
+            .contact-form-right {
+                max-width: 90%; /* Allow wider on mobile, but with some padding */
+                width: 100%; /* Take full width of its parent */
+            }
+
+            .contact-info-left {
+                padding: 2rem; /* Adjust padding for mobile */
+            }
+
             .contact-form {
                 padding: 1.5rem;
-                margin: 0 1.5rem;
-                /* Ensure padding on sides for mobile */
+                margin: 0; /* Reset margin, handled by contact-content-wrapper gap */
             }
 
             .form-actions {
@@ -2365,27 +2436,37 @@
     <section id="contact" class="contact section-separator-top">
         <div class="container">
             <h2 class="section-title">Get in Touch</h2>
-            <form class="contact-form" onsubmit="event.preventDefault(); handleContactSubmit(event);">
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" required>
+            <div class="contact-content-wrapper">
+                <div class="contact-info-left">
+                    <h3>Contact Details</h3>
+                    <p><span class="icon">📧</span> Email: <a href="mailto:dengelovani@gmail.com">dengelovani@gmail.com</a></p>
+                    <p><span class="icon">📞</span> Phone: <a href="tel:+11234567890">+1 (123) 456-7890</a></p>
+                    <p>Feel free to reach out directly via email or phone, or use the form on the right.</p>
                 </div>
-                <div class="form-group">
-                    <label for="email">Your Email</label>
-                    <input type="email" id="email" name="email" required>
+                <div class="contact-form-right">
+                    <form class="contact-form" onsubmit="event.preventDefault(); handleContactSubmit(event);">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" rows="6" required></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="subject">Subject</label>
-                    <input type="text" id="subject" name="subject" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Your Message</label>
-                    <textarea id="message" name="message" rows="6" required></textarea>
-                </div>
-                <div class="form-actions">
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </div>
-            </form>
+            </div>
         </div>
     </section>
 

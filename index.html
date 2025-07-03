@@ -1909,8 +1909,9 @@
             }
         }
 
-        /* --- Contact Section Styles --- */
-        #contact {
+         /* --- Contact Section Styles --- */
+         /* --- Contact Section Styles --- */
+         #contact {
             background: #1a1a1a;
             padding: 6rem 0;
             text-align: center;
@@ -1926,9 +1927,66 @@
             /* Adjusted spacing for the form */
         }
 
-        .contact-form {
-            max-width: 600px;
+        .contact-content-wrapper {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            align-items: flex-start; /* Align items to the top */
+            max-width: 1000px; /* Adjust max-width for the two columns */
             margin: 0 auto;
+        }
+
+        .contact-info-left {
+            flex: 1;
+            background-color: #0e0e0e;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 400px; /* Max width for the info column */
+        }
+
+        .contact-info-left h3 {
+            font-size: 1.8rem;
+            color: #ff4d00;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info-left p {
+            font-size: 1.1rem;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .contact-info-left p .icon {
+            font-size: 1.5rem; /* Size for the unicode symbols */
+            color: #ff4d00;
+        }
+
+        .contact-info-left a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info-left a:hover {
+            color: #ff4d00;
+            text-decoration: underline;
+        }
+
+
+        .contact-form-right {
+            flex: 1.5; /* Give more space to the form */
+            max-width: 600px; /* Max width for the form column */
+        }
+
+        .contact-form {
+            width: 100%; /* Ensure form takes full width of its container */
             background-color: #0e0e0e;
             padding: 3rem;
             border-radius: 12px;
@@ -1948,7 +2006,7 @@
         .form-group label {
             font-weight: bold;
             color: #fff;
-            font-size: 0.8rem;
+            font-size: 1rem;
         }
 
         .form-group input[type="text"],
@@ -1960,7 +2018,7 @@
             border-radius: 8px;
             background-color: #2a2a2a;
             color: #fff;
-            font-size: 0.7rem;
+            font-size: 1rem;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
@@ -2005,61 +2063,39 @@
             background-color: #e04300;
         }
 
-        .form-actions .refine-btn {
-            background-color: #333;
-            color: #fff;
-            border: 1px solid #555;
-        }
-
-        .form-actions .refine-btn:hover {
-            background-color: #555;
-        }
-
-        .refine-output-container {
-            margin-top: 1.5rem;
-            display: none;
-            /* Hidden by default */
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .refine-output-container label {
-            font-weight: bold;
-            color: #fff;
-            font-size: 1rem;
-        }
-
-        .refine-output-container textarea {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid #333;
-            border-radius: 8px;
-            background-color: #2a2a2a;
-            color: #fff;
-            font-size: 1rem;
-            min-height: 150px;
-            resize: vertical;
-            cursor: default;
-            /* Not directly editable by user */
-        }
-
-        .loading-indicator {
-            display: none;
-            color: #ff4d00;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-
         /* Mobile adjustments for contact form */
         @media (max-width: 768px) {
             #contact {
                 padding: 3rem 0;
             }
 
+            .contact-content-wrapper {
+                flex-direction: column; /* Stack columns vertically on mobile */
+                align-items: center; /* Center stacked content */
+                gap: 2rem;
+            }
+
+            .contact-info-left,
+            .contact-form-right {
+                max-width: 90%; /* Allow wider on mobile, but with some padding */
+                width: 100%; /* Take full width of its parent */
+            }
+
+            .contact-info-left {
+                padding: 2rem; /* Adjust padding for mobile */
+            }
+
+            .contact-info-left p {
+                font-size: 1rem; /* Slightly smaller text for mobile contact info */
+            }
+
+            .contact-info-left .desktop-only-contact-text {
+                display: none; /* Hide this specific paragraph on mobile */
+            }
+
             .contact-form {
                 padding: 1.5rem;
-                margin: 0;
-                /* Ensure padding on sides for mobile */
+                margin: 0; /* Reset margin, handled by contact-content-wrapper gap */
             }
 
             .form-actions {
@@ -2100,7 +2136,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="home">
         <!-- Animated shapes in the background (Desktop Only) -->
         <div class="animated-shape"></div>
         <div class="animated-shape square"></div>
@@ -2438,37 +2474,44 @@
     <section id="contact" class="contact section-separator-top">
         <div class="container">
             <h2 class="section-title">Get in Touch</h2>
-            <form class="contact-form" onsubmit="event.preventDefault(); handleContactSubmit(event);">
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" required>
+            <div class="contact-content-wrapper">
+                <div class="contact-info-left">
+                    <h3>Contact Details</h3>
+                    <p> Email: <a href="mailto:dengelovani@gmail.com">dengelovani@gmail.com</a></p>
+                    <p> Phone: <a href="tel:+11234567890">+48 452 713 659</a></p>
+                    <p class="desktop-only-contact-text">Feel free to reach out directly via email or phone, or use the form on the right.</p>
                 </div>
-                <div class="form-group">
-                    <label for="email">Your Email</label>
-                    <input type="email" id="email" name="email" required>
+                <div class="contact-form-right">
+                    <form class="contact-form" onsubmit="event.preventDefault(); handleContactSubmit(event);">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" rows="6" required></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="subject">Subject</label>
-                    <input type="text" id="subject" name="subject" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Your Message</label>
-                    <textarea id="message" name="message" rows="6" required></textarea>
-                </div>
-                <div class="form-actions">
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </div>
-            </form>
+            </div>
         </div>
     </section>
     <footer>
         <div class="container">
            
             
-            <div class="footer-contact-info">
-                <p>Email: <a href="mailto:dengelovani@gmail.com">dengelovani@gmail.com</a></p>
-                <p>Phone: +48 452 713 659</p>
-            </div>
+           
             <div class="footer-nav-links">
                 <a href="#home">Home</a>
                 <a href="#portfolio">Portfolio</a>
