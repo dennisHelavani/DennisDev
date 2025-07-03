@@ -2694,6 +2694,42 @@
             if (aboutMobileLayout) {
                 aboutObserver.observe(aboutMobileLayout);
             }
+
+
+
+
+            window.handleContactSubmit = async (event) => {
+  event.preventDefault();
+  const form = event.target;
+  const submitBtn = form.querySelector('.submit-btn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending...';
+
+  const formData = new FormData(form);
+  const templateParams = {
+    from_name: formData.get('name'),
+    from_email: formData.get('email'),
+    subject: formData.get('subject'),
+    message: formData.get('message')
+  };
+
+  try {
+    await emailjs.send(
+      'service_ct4cl3l',    // e.g. "service_xxx"
+      'template_n2vdim7',   // e.g. "template_contact"
+      templateParams
+    );
+    alert('Your message has been sent successfully!');
+    form.reset();
+  } catch (err) {
+    console.error('EmailJS error:', err);
+    alert('Failed to send message. Please try again later.');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send Message';
+  }
+};
+
         });
     </script>
 </body>
